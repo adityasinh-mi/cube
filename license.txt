@@ -1,0 +1,11 @@
+Model Information:
+* title:	Tom and Jerry model for printing
+* source:	https://sketchfab.com/3d-models/tom-and-jerry-model-for-printing-63da7303fa2c4dd69ac00e9d9d079d64
+* author:	ken1s (https://sketchfab.com/ken1s)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Tom and Jerry model for printing" (https://sketchfab.com/3d-models/tom-and-jerry-model-for-printing-63da7303fa2c4dd69ac00e9d9d079d64) by ken1s (https://sketchfab.com/ken1s) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
