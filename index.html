@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>AR Model with Custom Marker and Message</title>
+    <title>AR Cube with Custom Marker and Message</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.0.5/aframe/build/aframe-ar.js"></script>
   </head>
@@ -11,19 +11,22 @@
     <a-scene embedded arjs>
       <!-- Create a marker element to track the custom marker -->
       <a-marker type="pattern" url="marker.patt">
-        <!-- Create an entity with a custom 3D model -->
+        <!-- Create an entity with a red cube and a rotation animation -->
         <a-entity
-          id="my-model"
-          gltf-model="url(my-model.gltf)"
-          scale="0.05 0.05 0.05"
-          position="0 0 0"
+          id="my-cube"
+          geometry="primitive: box"
+          material="color: red"
+          scale="0.5 0.5 0.5"
+          animation__rotate="property: rotation; to: 0 360 0; loop: true; dur: 5000"
+          event-set__touchstart="_event: touchstart; _target: #my-cube; rotation: 0 0 0"
+          event-set__touchmove="_event: touchmove; _target: #my-cube; rotation: 0 0 0"
+          event-set__touchend="_event: touchend; _target: #my-cube; rotation: 0 0 0"
         ></a-entity>
       </a-marker>
 
       <!-- Create a text entity to show a message when the marker is not detected -->
       <a-entity
         position="0 0 -1"
-        scale="1 1 1" 
         text="value: Please place camera in front of marker; align: center; color: #000000"
         visible="false"
       ></a-entity>
