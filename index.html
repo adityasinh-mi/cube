@@ -13,10 +13,14 @@
       <a-marker type="pattern" url="marker.patt">
         <!-- Create an entity with a red cube and a rotation animation -->
         <a-entity
+          id="my-cube"
           geometry="primitive: box"
           material="color: red"
-          animation="property: rotation; to: 0 360 0; loop: true; dur: 5000"
           scale="0.5 0.5 0.5"
+          animation__rotate="property: rotation; to: 0 360 0; loop: true; dur: 5000"
+          event-set__touchstart="_event: touchstart; _target: #my-cube; rotation: 0 0 0"
+          event-set__touchmove="_event: touchmove; _target: #my-cube; rotation: 0 0 0"
+          event-set__touchend="_event: touchend; _target: #my-cube; rotation: 0 0 0"
         ></a-entity>
       </a-marker>
 
