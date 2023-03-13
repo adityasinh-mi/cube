@@ -7,13 +7,24 @@
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.0.5/aframe/build/aframe-ar.js"></script>
   </head>
   <body>
+    <!-- Create an AR scene with AR.js -->
     <a-scene embedded arjs>
+      <!-- Create an entity with a red cube and a rotation animation -->
       <a-entity
         geometry="primitive: box"
         material="color: red"
         animation="property: rotation; to: 0 360 0; loop: true; dur: 5000"
       ></a-entity>
-      <a-marker preset="hiro"></a-marker>
+
+      <!-- Create a marker element to track the hiro marker -->
+      <a-marker preset="hiro">
+        <!-- Add a nested entity to show on top of the marker -->
+        <a-entity
+          geometry="primitive: box"
+          material="color: blue"
+          position="0 0.5 0"
+        ></a-entity>
+      </a-marker>
     </a-scene>
   </body>
 </html>
