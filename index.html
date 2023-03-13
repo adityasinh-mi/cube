@@ -2,29 +2,55 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>AR Cube with Custom Marker</title>
+    <title>AR Cube with Custom Marker and Message</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.0.5/aframe/build/aframe-ar.js"></script>
   </head>
   <body>
     <!-- Create an AR scene with AR.js -->
     <a-scene embedded arjs>
-      <!-- Create an entity with a red cube and a rotation animation -->
-      <a-entity
-        geometry="primitive: box"
-        material="color: red"
-        animation="property: rotation; to: 0 360 0; loop: true; dur: 5000"
-      ></a-entity>
-
       <!-- Create a marker element to track the custom marker -->
-      <a-marker type="pattern" url="./marker.patt">
-        <!-- Add a nested entity to show on top of the marker -->
+      <a-marker type="pattern" url="path/to/marker-pattern-file.patt">
+        <!-- Create an entity with a red cube and a rotation animation -->
         <a-entity
           geometry="primitive: box"
-          material="color: blue"
-          position="0 0.5 0"
+          material="color: red"
+          animation="property: rotation; to: 0 360 0; loop: true; dur: 5000"
+          scale="0.1 0.1 0.1"
         ></a-entity>
       </a-marker>
+
+      <!-- Create a text entity to show a message when the marker is not detected -->
+      <a-entity
+        position="0 0 -1"
+        text="value: Please place camera in front of marker; align: center; color: #000000"
+        visible="false"
+      ></a-entity>
+
+      <!-- Create a camera entity -->
+      <a-entity camera></a-entity>
+
+      <!-- Add lighting to the scene -->
+      <a-entity
+        light="type: ambient; color: #888"
+        position="0 3 0"
+      ></a-entity>
+      <a-entity
+        light="type: directional; color: #fff; intensity: 0.5"
+        position="-1 1 0"
+      ></a-entity>
     </a-scene>
+
+    <script>
+      // Show or hide the message entity based on the marker visible event
+      const marker = document.querySelector("a-marker");
+      const message = document.querySelector("a-entity[text]");
+      marker.addEventListener("markerFound", () => {
+        message.setAttribute("visible", false);
+      });
+      marker.addEventListener("markerLost", () => {
+        message.setAttribute("visible", true);
+      });
+    </script>
   </body>
 </html>
