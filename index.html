@@ -6,37 +6,44 @@
     <title>AR.js Cube</title>
     <script>
         AFRAME.registerComponent('camera-permission', {
-  init: function () {
-    var el = this.el;
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      var button = document.createElement('button');
-      button.innerHTML = 'Grant Camera Access';
-      button.style.position = 'absolute';
-      button.style.zIndex = 9999;
-      button.style.bottom = '30px';
-      button.style.left = '50%';
-      button.style.transform = 'translateX(-50%)';
-      button.onclick = function() {
-        navigator.mediaDevices.getUserMedia({ video: true })
-          .then(function() {
-            button.remove();
-            el.sceneEl.renderer.xr.getSession().then(function (session) {
-              session.addEventListener('end', function () {
-                location.reload();
-              });
-            });
-          })
-          .catch(function (e) {
-            console.error(e);
-            alert('Failed to access the camera. Please grant camera permission and try again.');
-          });
-      };
-      document.body.appendChild(button);
-    } else {
-      alert('This browser does not support camera access.');
-    }
-  }
-});
+          init: function () {
+            var el = this.el;
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+              var button = document.createElement('button');
+              button.innerHTML = 'Grant Camera Access';
+              button.style.position = 'absolute';
+              button.style.zIndex = 9999;
+              button.style.bottom = '30px';
+              button.style.left = '50%';
+              button.style.transform = 'translateX(-50%)';
+              button.onclick = function() {
+                navigator.mediaDevices.getUserMedia({ video: true })
+                  .then(function() {
+                    button.remove();
+                    el.sceneEl.renderer.xr.getSession().then(function (session) {
+                      session.addEventListener('end', function () {
+                        location.reload();
+                      });
+                    });
+                  })
+                  .catch(function (e) {
+                    console.error(e);
+                    alert('Failed to access the camera. Please grant camera permission and try again.');
+                  });
+              };
+              document.body.appendChild(button);
+            } else {
+              alert('This browser does not support camera access.');
+            }
+          }
+        });
+
+        AFRAME.registerComponent('rotate', {
+          tick: function () {
+            this.el.object3D.rotation.x += 0.01;
+            this.el.object3D.rotation.y += 0.01;
+          }
+        });
     </script>    
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/ar.js"></script>
@@ -44,7 +51,7 @@
 <body style='margin : 0px; overflow: hidden;'>
     <a-scene embedded arjs='sourceType: webcam;' camera-permission>
         <a-nft type='nft' url='marker.patt'>
-            <a-box position='0 0.5 0' material='color: red;' rotation='0 45 45' scale='0.4 0.4 0.4'></a-box>
+            <a-box position='0 0.5 0' material='color: green;' rotation='0 45 45' scale='0.4 0.4 0.4' rotate></a-box>
         </a-nft>
         <a-entity camera></a-entity>
     </a-scene>
