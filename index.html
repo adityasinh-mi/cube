@@ -13,13 +13,12 @@
       <a-marker type="pattern" url="marker.patt">
         <!-- Create an entity with a video and a rotation animation -->
         <a-video
-          id="my-video"
-          src="video.mp4"
-          scale="1 1 1"
-          animation__rotate="property: rotation; to: 0 360 0; loop: true; dur: 5000"
-          event-set__touchstart="_event: touchstart; _target: #my-video; rotation: 0 0 0"
-          event-set__touchmove="_event: touchmove; _target: #my-video; rotation: 0 0 0"
-          event-set__touchend="_event: touchend; _target: #my-video; rotation: 0 0 0"
+          src="my-video.mp4"
+          width="2"
+          height="2"
+          position="0 0 0"
+          autoplay="true"
+          loop="true"
         ></a-video>
       </a-marker>
 
