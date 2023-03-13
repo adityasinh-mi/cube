@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>AR Cube</title>
+    <title>AR Cube with Custom Marker</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.0.5/aframe/build/aframe-ar.js"></script>
   </head>
@@ -16,8 +16,8 @@
         animation="property: rotation; to: 0 360 0; loop: true; dur: 5000"
       ></a-entity>
 
-      <!-- Create a marker element to track the hiro marker -->
-      <a-marker preset="hiro">
+      <!-- Create a marker element to track the custom marker -->
+      <a-marker type="pattern" url="./marker.patt">
         <!-- Add a nested entity to show on top of the marker -->
         <a-entity
           geometry="primitive: box"
