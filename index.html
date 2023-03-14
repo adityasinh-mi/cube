@@ -17,10 +17,10 @@
           geometry="primitive: box"
           material="color: red"
           scale="0.5 0.5 0.5"
-          animation__rotate="property: rotation; to: 0 360 0; loop: true; dur: 5000"
-          event-set__touchstart="_event: touchstart; _target: #my-cube; rotation: 0 0 0"
-          event-set__touchmove="_event: touchmove; _target: #my-cube; rotation: 0 0 0"
-          event-set__touchend="_event: touchend; _target: #my-cube; rotation: 0 0 0"
+          rotation="0 0 0"
+          event-set__touchstart="_event: touchstart; _target: #my-cube; _function: setRotation"
+          event-set__touchmove="_event: touchmove; _target: #my-cube; _function: setRotation"
+          event-set__touchend="_event: touchend; _target: #my-cube; _function: setRotation"
         ></a-entity>
       </a-marker>
 
@@ -44,6 +44,17 @@
         position="-1 1 0"
       ></a-entity>
     </a-scene>
+
+    <script>
+      // Define the setRotation function to set the rotation of the entity based on the touch position
+      function setRotation(event) {
+        const touch = event.touches[0];
+        const x = touch.clientX / window.innerWidth;
+        const y = touch.clientY / window.innerHeight;
+        const rotation = `${-y * 90} ${x * 180} 0`;
+        event.target.setAttribute("rotation", rotation);
+      }
+    </script>
 
     <script>
       // Show or hide the message entity based on the marker visible event
