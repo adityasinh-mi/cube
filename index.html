@@ -18,9 +18,7 @@
           material="color: red"
           scale="0.5 0.5 0.5"
           rotation="0 0 0"
-          event-set__touchstart="_event: touchstart; _target: #my-cube; _function: setRotation"
-          event-set__touchmove="_event: touchmove; _target: #my-cube; _function: setRotation"
-          event-set__touchend="_event: touchend; _target: #my-cube; _function: setRotation"
+          event-set__deviceorientation="_event: deviceorientation; _target: #my-cube; _function: setRotation"
         ></a-entity>
       </a-marker>
 
@@ -46,13 +44,12 @@
     </a-scene>
 
     <script>
-      // Define the setRotation function to set the rotation of the entity based on the touch position
+      // Define the setRotation function to set the rotation of the entity based on the device orientation
       function setRotation(event) {
-        const touch = event.touches[0];
-        const x = touch.clientX / window.innerWidth;
-        const y = touch.clientY / window.innerHeight;
-        const rotation = `${-y * 90} ${x * 180} 0`;
+        const { alpha, beta, gamma } = event.detail;
+        const rotation = `${beta} ${gamma} ${alpha}`;
         event.target.setAttribute("rotation", rotation);
+        event.target.setAttribute("material", "color: blue");
       }
     </script>
 
