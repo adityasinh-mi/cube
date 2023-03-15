@@ -29,7 +29,7 @@
       ></a-entity>
 
       <!-- Create a camera entity -->
-      <a-entity camera></a-entity>
+      <a-entity camera cursor></a-entity>
 
       <!-- Add lighting to the scene -->
       <a-entity
@@ -43,30 +43,16 @@
     </a-scene>
 
     <script>
-      // Add a cursor listener component to the cube entity to rotate it on click and drag
-      AFRAME.registerComponent('cursor-listener', {
+      // Add an event listener to the cube to rotate it when it is clicked
+      AFRAME.registerComponent("cursor-listener", {
         init: function () {
-          this.el.addEventListener('mousedown', function (evt) {
-            this.setAttribute('material', 'color', 'blue');
+          this.el.addEventListener("click", function (evt) {
+            const rotation = this.getAttribute("rotation");
+            rotation.y += 90;
+            this.setAttribute("rotation", rotation);
+            this.setAttribute("material", "color: blue");
           });
-          this.el.addEventListener('mouseup', function (evt) {
-            this.setAttribute('material', 'color', 'red');
-          });
-          this.el.addEventListener('mouseleave', function (evt) {
-            this.setAttribute('material', 'color', 'red');
-          });
-          this.el.addEventListener('dragstart', function (evt) {
-            this.setAttribute('material', 'color', 'green');
-          });
-          this.el.addEventListener('dragend', function (evt) {
-            this.setAttribute('material', 'color', 'red');
-          });
-          this.el.addEventListener('cursorup', function (evt) {
-            const rotation = this.getAttribute('rotation');
-            rotation.y += 10;
-            this.setAttribute('rotation', rotation);
-          });
-        }
+        },
       });
     </script>
 
