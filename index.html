@@ -17,8 +17,7 @@
           geometry="primitive: box"
           material="color: red"
           scale="0.5 0.5 0.5"
-          rotation="0 360 0"
-          event-set__deviceorientation="_event: deviceorientation; _target: #my-cube; _function: setRotation"
+          cursor-listener
         ></a-entity>
       </a-marker>
 
@@ -44,13 +43,31 @@
     </a-scene>
 
     <script>
-      // Define the setRotation function to set the rotation of the entity based on the device orientation
-      function setRotation(event) {
-        const { alpha, beta, gamma } = event.detail;
-        const rotation = `${beta} ${gamma} ${alpha}`;
-        event.target.setAttribute("rotation", rotation);
-        event.target.setAttribute("material", "color: blue");
-      }
+      // Add a cursor listener component to the cube entity to rotate it on click and drag
+      AFRAME.registerComponent('cursor-listener', {
+        init: function () {
+          this.el.addEventListener('mousedown', function (evt) {
+            this.setAttribute('material', 'color', 'blue');
+          });
+          this.el.addEventListener('mouseup', function (evt) {
+            this.setAttribute('material', 'color', 'red');
+          });
+          this.el.addEventListener('mouseleave', function (evt) {
+            this.setAttribute('material', 'color', 'red');
+          });
+          this.el.addEventListener('dragstart', function (evt) {
+            this.setAttribute('material', 'color', 'green');
+          });
+          this.el.addEventListener('dragend', function (evt) {
+            this.setAttribute('material', 'color', 'red');
+          });
+          this.el.addEventListener('cursorup', function (evt) {
+            const rotation = this.getAttribute('rotation');
+            rotation.y += 10;
+            this.setAttribute('rotation', rotation);
+          });
+        }
+      });
     </script>
 
     <script>
