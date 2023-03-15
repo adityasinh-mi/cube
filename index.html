@@ -14,8 +14,7 @@
         <!-- Create an entity with a red cube and a rotation animation -->
         <a-entity
           id="my-cube"
-          geometry="primitive: box"
-          material="color: red"
+          gltf-model="url(scene.glb)"
           scale="0.5 0.5 0.5"
           rotation="0 0 0"
           event-set__deviceorientation="_event: deviceorientation; _target: #my-cube; _function: setRotation"
