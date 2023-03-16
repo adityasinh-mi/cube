@@ -12,13 +12,11 @@
       <!-- Create a marker element to track the custom marker -->
       <a-marker type="pattern" url="marker.patt">
         <!-- Create an entity with a red cube and a rotation animation -->
-        <a-entity
-          id="my-cube"
-          geometry="primitive: box"
-          material="color: red"
+        <a-box
+          color="red"
           scale="0.5 0.5 0.5"
           cursor-listener
-        ></a-entity>
+        ></a-box>
       </a-marker>
 
       <!-- Create a text entity to show a message when the marker is not detected -->
@@ -29,7 +27,7 @@
       ></a-entity>
 
       <!-- Create a camera entity -->
-      <a-entity camera cursor></a-entity>
+      <a-entity camera></a-entity>
 
       <!-- Add lighting to the scene -->
       <a-entity
@@ -41,11 +39,9 @@
         position="-1 1 0"
       ></a-entity>
 
-      <!-- Create buttons for rotating the cube -->
-      <div class="buttons">
-        <button id="rotate-left">Rotate Left</button>
-        <button id="rotate-right">Rotate Right</button>
-      </div>
+      <!-- Create buttons to control rotation of the cube -->
+      <button id="rotate-left">Rotate Left</button>
+      <button id="rotate-right">Rotate Right</button>
     </a-scene>
 
     <script>
@@ -61,23 +57,6 @@
         },
       });
 
-      // Add event listeners to the rotate buttons to rotate the cube in the appropriate direction
-      const rotateLeftButton = document.getElementById("rotate-left");
-      const rotateRightButton = document.getElementById("rotate-right");
-      const cube = document.getElementById("my-cube");
-      rotateLeftButton.addEventListener("click", function () {
-        const rotation = cube.getAttribute("rotation");
-        rotation.y -= 90;
-        cube.setAttribute("rotation", rotation);
-      });
-      rotateRightButton.addEventListener("click", function () {
-        const rotation = cube.getAttribute("rotation");
-        rotation.y += 90;
-        cube.setAttribute("rotation", rotation);
-      });
-    </script>
-
-    <script>
       // Show or hide the message entity based on the marker visible event
       const marker = document.querySelector("a-marker");
       const message = document.querySelector("a-entity[text]");
@@ -86,6 +65,23 @@
       });
       marker.addEventListener("markerLost", () => {
         message.setAttribute("visible", true);
+      });
+
+      // Add event listeners to the rotate buttons to rotate the cube in different directions
+      const rotateLeftButton = document.querySelector("#rotate-left");
+      const rotateRightButton = document.querySelector("#rotate-right");
+      const cube = document.querySelector("a-box");
+
+      rotateLeftButton.addEventListener("click", () => {
+        const rotation = cube.getAttribute("rotation");
+        rotation.y -= 90;
+        cube.setAttribute("rotation", rotation);
+      });
+
+      rotateRightButton.addEventListener("click", () => {
+        const rotation = cube.getAttribute("rotation");
+        rotation.y += 90;
+        cube.setAttribute("rotation", rotation);
       });
     </script>
   </body>
