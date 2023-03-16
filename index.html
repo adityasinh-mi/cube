@@ -40,6 +40,12 @@
         light="type: directional; color: #fff; intensity: 0.5"
         position="-1 1 0"
       ></a-entity>
+
+      <!-- Create buttons for rotating the cube -->
+      <div class="buttons">
+        <button id="rotate-left">Rotate Left</button>
+        <button id="rotate-right">Rotate Right</button>
+      </div>
     </a-scene>
 
     <script>
@@ -53,6 +59,21 @@
             this.setAttribute("material", "color: blue");
           });
         },
+      });
+
+      // Add event listeners to the rotate buttons to rotate the cube in the appropriate direction
+      const rotateLeftButton = document.getElementById("rotate-left");
+      const rotateRightButton = document.getElementById("rotate-right");
+      const cube = document.getElementById("my-cube");
+      rotateLeftButton.addEventListener("click", function () {
+        const rotation = cube.getAttribute("rotation");
+        rotation.y -= 90;
+        cube.setAttribute("rotation", rotation);
+      });
+      rotateRightButton.addEventListener("click", function () {
+        const rotation = cube.getAttribute("rotation");
+        rotation.y += 90;
+        cube.setAttribute("rotation", rotation);
       });
     </script>
 
